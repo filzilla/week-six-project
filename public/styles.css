@@ -1,0 +1,29 @@
+.newgab{
+
+    width: 60%;
+    height: 100px;
+    margin:  20px 50px;
+
+}
+body{
+    background: #049372;
+}
+
+.gab-header{
+    color: #ffffff;
+}
+
+.navigation{
+     color: #ffffff;
+     text-align: center;
+     margin: 40px 60px;
+     padding-right: 30px;
+     padding-bottom: 20px;
+}
+header{
+    margin: 50px 50px;
+}
+
+h1{
+    color: #ffffff;
+}
