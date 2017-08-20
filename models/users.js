@@ -10,8 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
 
-        Users.hasMany(models.Messages, {foreignKey: 'userId'}),
-        Users.hasMany(models.Likes, {foreignKey: 'userId'})
+        Users.hasMany(models.Messages, {foreignKey: 'id'}),
+        Users.hasMany(models.Likes, {foreignKey: 'id'})
       }
     }
   });

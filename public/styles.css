@@ -27,3 +27,30 @@ header{
 h1{
     color: #ffffff;
 }
+
+.gabbs{
+    background-color: white;
+    color: black;
+    font-size: 1.25em;
+    border: 2px solid #049372;
+    margin: 20px 5px;
+    padding: 10px 10px;
+}
+.like-bttn{
+    
+}
+.blah-text{
+    margin: 0px 40px;
+    display: block;
+    font-size: 1em;
+}
+.createdAt{
+    font-size: .50em;
+}
+.button-container{
+    display: flex;
+    justify-content: flex-start;
+}
+.button{
+    flex-basis: 10%;
+}

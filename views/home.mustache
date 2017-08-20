@@ -5,29 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link  rel="stylesheet" href = "./styles.css"></link>
+    <link  rel="stylesheet" href = "/styles.css">
 </head>
 <body>
     <header>
         <a href="/" class="navigation">Home</a>
         <a href="newgabs" class="navigation">Create a Gab</a>
+            {{^isAuthenticated}}
         <a href="/login" class="navigation">Log-in</a>
+            {{/isAuthenticated}}
+            {{#isAuthenticated}}
+        <a href="/logout" class="navigation">Log-in</a>
+            {{/isAuthenticated}}
         <a href="/signup" class="navigation">Register</a>
 
-    </header>   
+    </header>  
+        <h1>Welcome to Gabble {{#users}}{{users.userName}}{{/users}}</h1>
+        {{#list}}
+        <div class="gabbs">
 
-        <h1>Welcome to Gabble</>
-        <h3> blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
-        <h3> chat chat chat chat chat chat chat chat chat chat chat chat chat chat </h3>
-        <h3> talk talk talk talk talk talk talk talk takl talk talk talk talk talk </h3>
-        <h3> blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
-        <h3> chat chat chat chat chat chat chat chat chat chat chat chat chat chat </h3>
-        <h3> talk talk talk talk talk talk talk talk takl talk talk talk talk talk </h3>
-        <h3> blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
-        <h3> chat chat chat chat chat chat chat chat chat chat chat chat chat chat </h3>
-        <h3> talk talk talk talk talk talk talk talk takl talk talk talk talk talk </h3>
- {{#Messages}}
-{{messageText}}
-{{/Messages}}
+         {{messageText}} 
+         
+         <div class="button-container">
+            <span class="button"><form action="/" method="DELETE"><button class="delete-bttn" name="delete" type="submit" value="{{.}}">Delete</button></form></span>
+            <span class="button"><form action="/" method="POST" ><button class="like-bttn" type="submit" value="{{id}}" >Like</button></form></span>
+             {{createdAt}}
+             Posted by:{{userId}}
+            
+            </div>
+            
+        </div>
+             {{/list}}
+         <h4 class="blah-text">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
+
+       
 </body>
 </html>

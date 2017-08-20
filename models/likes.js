@@ -8,8 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
       
-      Likes.belongsTo(models.Users, { foreignKey: 'userId'});
-      Likes.belongsTo(models.Messages, { foreignKey: 'messageId'});
+      Likes.belongsTo(models.Users, { foreignKey: 'id'});
+      Likes.belongsTo(models.Messages, { foreignKey: 'id'});
       }
     }
   });

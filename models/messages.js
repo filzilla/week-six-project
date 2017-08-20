@@ -7,8 +7,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-         Messages.hasMany(models.Likes, { foreignKey: 'messageId'});
-         Messages.belongsTo(models.Users, { foreignKey: 'userId'});
+         Messages.hasMany(models.Likes, { foreignKey: 'id'});
+         Messages.belongsTo(models.Users, { foreignKey: 'id'});
       }
     }
   });
