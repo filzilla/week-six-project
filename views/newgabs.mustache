@@ -9,20 +9,29 @@
 </head>
 <body>
      <header>
+        <header>
         <a href="/" class="navigation">Home</a>
         <a href="newgabs" class="navigation">Create a Gab</a>
-        <a href="/login" class="navigation">Log-in</a>
+         
+        <a href="/logout" class="navigation">Logged in as:{{#model}}{{newUser}}{{/model}}</a>
+          
+  
+        <a href="/logout" class="navigation">LogOut</a>
+           
         <a href="/signup" class="navigation">Register</a>
 
     </header>  
 
-    <form action="/newgabs" method="post">
+    </header>  
 
-        <h1 class= "gab-header">Create a New Gab</h1>
+    <form class="text" action="/newgabs" method="post">
+
+        <h1 class= "gab-header text">Create a New Gab</h1>
         <textarea class ="newgab" type="textarea"  col = "150" rows = "12" name = "message" placeholder="Add Gabb here ....."/></textarea>
         <input class="submit" type="submit" placeholder="submit"/>
 
     </form>
+        <div class="text">
         <h3> blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
         <h3> chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat</h3>
         <h3> talk talk talk talk talk talk talk talk takl talk talk talk talk talk talk talk talk talk talk talk talk talk</h3>
@@ -32,7 +41,7 @@
         <h3> blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
         <h3> chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat chat</h3>
         <h3> talk talk talk talk talk talk talk talk takl talk talk talk talk talk talk talk talk talk talk talk talk talk</h3>
-
+        </div>
 
 </body>
 </html>

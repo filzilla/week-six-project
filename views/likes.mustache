@@ -5,17 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-       <link  rel="stylesheet" href = "./styles.css"></link>
+      <link  rel="stylesheet" href = "/styles.css"/>
 </head>
 <body>
      <header>
-        <a href="/home" class="navigation">Home</a>
-        <a href="newgabs" class="navigation">Create a Gab</a>
+        <a href="/" class="navigation">Home</a>
+        <a href="/newgabs" class="navigation">Create a Gab</a>
         <a href="/login" class="navigation">Log-in</a>
         <a href="/signup" class="navigation">Register</a>
 
     </header> 
+    {{#singleMessage}}
+    <div class="gabbs">
+       <p> {{messageText}}</p>
+       <p> {{createdAt}}</p>
+    </div>
+     {{/singleMessage}}
+    <p class="liked-by liked-header">Number of Likes: {{numberOfLikes.length}}</p>
+         <h4 class="liked-by liked-header">Message liked by the following users:</h4>
 
+     {{#listOfLikes}}
+      
+       <p class="liked-by"> {{userId}}</p>
+    {{/listOfLikes}}
+   
 
 
     

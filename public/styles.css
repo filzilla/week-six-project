@@ -29,12 +29,19 @@ h1{
 }
 
 .gabbs{
-    background-color: white;
+    background-color: #ffffff;
     color: black;
     font-size: 1.25em;
     border: 2px solid #049372;
-    margin: 20px 5px;
+    margin: 12.5px 300px 12.5px 57px;
     padding: 10px 10px;
+}
+
+.date{
+    font-size: .50em;
+    font-family: Arial, Helvetica, sans-serif;
+    color: darkgray;
+    margin: 5px;
 }
 .like-bttn{
     
@@ -43,6 +50,13 @@ h1{
     margin: 0px 40px;
     display: block;
     font-size: 1em;
+}
+.user{
+    color: #049372;
+     margin: 5px;
+}
+.gab-text{
+    margin: 5px;
 }
 .createdAt{
     font-size: .50em;
@@ -53,4 +67,15 @@ h1{
 }
 .button{
     flex-basis: 10%;
+}
+.liked-by{
+    font-size: 1.1em;
+    color: #ffffff;
+    margin-left: 400px;
+}
+.liked-header{
+    margin-left: 100px;
+}
+.text{
+    text-align: center;
 }

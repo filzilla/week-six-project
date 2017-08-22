@@ -40,16 +40,63 @@ application.use(function(request, response, next){
 application.get('/', async (request, response) => {
   //  console.log(request.session);
     if(request.session.user){
-    var list =  await models.Messages.findAll({
+         var list =  await models.Messages.findAll({
         order:[
-        ['createdAt', 'DESC']]
+            ['createdAt', 'DESC']]
+       //  include: [{all:true}
+                 //    {  model: models.users,
+                   //     as: "users"
+                 //    },
+                 //    {
+                  //      model: models.likes,
+                   //     as: "likes",
+                    //    include: {
+                    //                model: models.users,
+                      //              as: "user"
+                       //         }
+                    // }
+               //     ]
+       
+   // });
+   //  } catch (e) {
+   //         console.log("Error. No Messages found");
+            
+        }); 
+    var model = {};
+    var user =  await models.Users.findAll({
+        where: {
+            displayname: request.session.userId
+        }
+        
     });
+
+   // var showDelete = await models.Messages.find({
+   //     where: {
+
+     //       userid
+     //   }
+   // })
+    if(request.session.userId === models.Messages.userId){
+    var showDelete = true;
+    }else{
+        var showDelete = false;
+    }
+       
+    model.list = list;
+    model.showDelete = showDelete;
+    model.user = user;
+    console.log(model.showDelete);
+
+
+    
+   // console.log(user);
+   // model.isAuthenticated= request.session.isAuthenticated;
+    
     //console.log(list)
-   
-      
-//if logged in display 
-      console.log(list);
-    response.render('home', {list:list});
+
+    //if logged in display 
+    //  console.log(list);
+    response.render('home', {model, showDelete});
     }else{
         response.redirect('/signup');
     }
@@ -78,7 +125,7 @@ application.post('/signup', async(request, response) => {
         username: username,
         password: password,
         email: email,
-       displayname: displayname,
+        displayname: displayname,
         
      });
    
@@ -104,10 +151,10 @@ application.post('/login', async (request, response) => {
             request.session.user = user.username;
             request.session.isAuthenticated = true;
             request.session.userId = user.displayname;
-            console.log(user.id);
-            console.log(request.session.userId);
-            console.log(request.session.user);
-            console.log(user.displayname);
+      //      console.log(user.id);
+      //      console.log(request.session.userId);
+      //      console.log(request.session.user);
+      //      console.log(user.displayname);
             return response.redirect('/newgabs');
            
        } catch(e) {
@@ -118,9 +165,15 @@ application.post('/login', async (request, response) => {
   });
 
 
-application.get('/newgabs', (request, response) => {
+application.get('/newgabs', async (request, response) => {
     if(request.session.user){
-    response.render('newgabs');
+
+        model = {};
+
+       var newUser = request.session.userId;
+       model.newUser =newUser;
+    
+    response.render('newgabs', {model});
     }else{
         response.redirect('/login');
     }
@@ -131,7 +184,7 @@ application.post('/newgabs', (request, response) => {
 if(request.session.user){
 var newMessage = request.body.message;
 var newUserMessageId = request.session.userId;
-console.log(newUserMessageId);
+//console.log(newUserMessageId);
 
     models.Messages.create({
        messageText: newMessage,
@@ -139,7 +192,7 @@ console.log(newUserMessageId);
  
     })
     
-   console.log(userId);
+  // console.log(userId);
    response.redirect('/');
 }else{
     response.redirect('/login');
@@ -151,35 +204,82 @@ application.get('/likes', (request, response) => {
 });
 
 
-application.post('/:id', async (request, response) =>{
+application.post('/like/:id', async (request, response) =>{
 
     var id = request.params.id;
-  //  console.log(id);
+    console.log(id);
     var userId= request.session.userId;
-
-    await models.Likes.Create({
+    console.log(userId);
+    await models.Likes.create({
         isLiked: true,
         messageId: id,
         userId: userId
     
     })
- //   console.log(models.Likes);
+    console.log("it was liked");
     response.redirect('/');
 
 });
 
-application.delete('/:id', (request, response)=>{
-    console.log(request.params.id)
+application.get('/likes/:id', async (request, response) =>{
+
+    var messageToView = request.params.id;
+    var singleMessage = await models.Messages.findAll({
+        where: {
+            id: messageToView
+        }
+    
+    });
+    var listOfLikes = await models.Likes.findAll({
+        where: {
+            messageId: messageToView
+        }
+    });
+
+    var numberOfLikes = await models.Likes.findAll({
+        where: {
+            messageId: messageToView,
+            isLiked: true
+            }
+    });
+    console.log (numberOfLikes.length);
+    
+    
+    response.render('likes', {singleMessage, listOfLikes, numberOfLikes});
+});
+
+application.post('/delete/:id', async (request, response)=>{
+    console.log(request.params.id);
     messageToDelete = request.params.id;
-   // console.log(messageToDelete)
-    models.Messages.destroy({
-        where:{
-        id: messageToDelete
-    }
+    console.log(messageToDelete);
   
+  await models.Messages.destroy({
+      where: {
+          id: messageToDelete
+      }
+    
     })
-   console.log("message successfully deleted");
-    response.redirect('home');
+    await models.Likes.destroy({
+        where: {
+            messageId: messageToDelete
+        }
+  });
+
+    console.log("message successfully deleted");
+    response.redirect('/');
+
+    });
+
+    
+   
+
+
+
+application.get('/logout', (request, response) =>{
+
+
+
+    response.redirect('/login');
 })
 
 application.listen(3000, function () {

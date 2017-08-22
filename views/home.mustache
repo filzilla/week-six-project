@@ -5,38 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link  rel="stylesheet" href = "/styles.css">
+    <link  rel="stylesheet" href = "/styles.css"/>
 </head>
 <body>
+
+
     <header>
         <a href="/" class="navigation">Home</a>
         <a href="newgabs" class="navigation">Create a Gab</a>
-            {{^isAuthenticated}}
-        <a href="/login" class="navigation">Log-in</a>
-            {{/isAuthenticated}}
-            {{#isAuthenticated}}
-        <a href="/logout" class="navigation">Log-in</a>
-            {{/isAuthenticated}}
+         
+        <a href="/logout" class="navigation">Logged in as:{{#model.user}}{{displayname}}{{/model.user}}</a>
+          
+  
+        <a href="/logout" class="navigation">LogOut</a>
+           
         <a href="/signup" class="navigation">Register</a>
 
     </header>  
-        <h1>Welcome to Gabble {{#users}}{{users.userName}}{{/users}}</h1>
-        {{#list}}
-        <div class="gabbs">
 
-         {{messageText}} 
+
+
+        
+       {{#model.user}} <h1>Welcome to Gabble {{displayname}}</h1>{{/model.user}}
+           
+         {{#model.list}}
+        <div class="gabbs">
+            
+         <p class="gab-text">{{messageText}} </p>
          
-         <div class="button-container">
-            <span class="button"><form action="/" method="DELETE"><button class="delete-bttn" name="delete" type="submit" value="{{.}}">Delete</button></form></span>
-            <span class="button"><form action="/" method="POST" ><button class="like-bttn" type="submit" value="{{id}}" >Like</button></form></span>
-             {{createdAt}}
-             Posted by:{{userId}}
-            
-            </div>
-            
-        </div>
-             {{/list}}
+         <p class="date">{{createdAt}}</p>
+         <p class="user"> Posted by: {{userId}}</p>
+        
+              {{#model.showDelete}} <span class="button"><form action="/delete/{{id}}" method="POST"><button class="delete-bttn" name="delete" type="submit">Delete</button></form></span>
+                <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/model.showDelete}}
+
+ {{^model.showDelete}} <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/model.showDelete}}
+
+                <a class="user" href= "/likes/{{id}}">View Likes</a>
+                <p>No Likes Yet</p>
+                <p>Number of Likes: {{numberOfLikes.length}}</p>
+         </div>
          <h4 class="blah-text">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
+
+          {{/model.list}}
+           
+          <div class="button-container">
+             
+           
+        </div>
+            
 
        
 </body>
