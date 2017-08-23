@@ -71,8 +71,6 @@ application.get('/', async (request, response) => {
         
     });
 
-    var likes = await models.List.findAll({});
-
         console.log(list.length);
    for (i = 0; i < list.length; i++) {
       if (list[i].userId === request.session.userId) {
@@ -199,7 +197,9 @@ application.post('/like/:id', async (request, response) =>{
     console.log(id);
     var userId= request.session.userId;
     console.log(userId);
-    await models.Likes.create({
+    
+    await models.Likes.Create({
+        
         isLiked: true,
         messageId: id,
         userId: userId

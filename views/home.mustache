@@ -10,25 +10,20 @@
 <body>
 
 
-    <header>
+    <header class="links">
+
         <a href="/" class="navigation">Home</a>
         <a href="newgabs" class="navigation">Create a Gab</a>
-         
-        <a href="/logout" class="navigation">Logged in as:{{#model.user}}{{displayname}}{{/model.user}}</a>
-          
-  
         <a href="/logout" class="navigation">LogOut</a>
-           
         <a href="/signup" class="navigation">Register</a>
 
+        <a href="/logout" class="navigation">Logged in as:{{#model.user}}{{displayname}}{{/model.user}}</a>
+
     </header>  
-
-
-
-        
-       {{#model.user}} <h1>Welcome to Gabble {{displayname}}</h1>{{/model.user}}
+            {{#model.user}} 
+       <h1>Welcome to Gabble {{displayname}}</h1>{{/model.user}}
            
-         {{#model.list}}
+             {{#model.list}}
         <div class="gabbs">
             
          <p class="gab-text">{{messageText}} </p>
@@ -36,25 +31,21 @@
          <p class="date">{{createdAt}}</p>
          <p class="user"> Posted by: {{userId}}</p>
         
-              {{#showDelete}} <span class="button"><form action="/delete/{{id}}" method="POST"><button class="delete-bttn" name="delete" type="submit">Delete</button></form></span>
-                <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/showDelete}}
+                {{#showDelete}} 
+        <span class="button"><form action="/delete/{{id}}" method="POST"><button class="delete-bttn" name="delete" type="submit">Delete</button></form></span>
+        <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>
+                {{/showDelete}}
 
- {{^showDelete}} <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/showDelete}}
+                {{^showDelete}} 
+        <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>
+                {{/showDelete}}
 
-                <a class="user" href= "/likes/{{id}}">View Likes</a>
-                <p>No Likes Yet</p>
-                <p>Number of Likes: {{numberOfLikes.length}}</p>
-         </div>
-         <h4 class="blah-text">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
-
-          {{/model.list}}
-           
-          <div class="button-container">
-             
-           
+        <a class="user" href= "/likes/{{id}}">View Likes</a>
+               
         </div>
-            
+        <h4 class="blah-text">blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</h3>
 
-       
+                {{/model.list}}
+           
 </body>
 </html>

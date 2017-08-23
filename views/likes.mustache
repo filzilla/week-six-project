@@ -8,26 +8,29 @@
       <link  rel="stylesheet" href = "/styles.css"/>
 </head>
 <body>
-     <header>
+     <header class="links">
+         
         <a href="/" class="navigation">Home</a>
         <a href="/newgabs" class="navigation">Create a Gab</a>
         <a href="/login" class="navigation">Log-in</a>
         <a href="/signup" class="navigation">Register</a>
 
     </header> 
-    {{#singleMessage}}
+            {{#singleMessage}}
     <div class="gabbs">
        <p> {{messageText}}</p>
-       <p> {{createdAt}}</p>
+       <p class="date"> {{createdAt}}</p>
+       <p class="user">Posted by: {{userId}}</p>
+      
     </div>
-     {{/singleMessage}}
+            {{/singleMessage}}
     <p class="liked-by liked-header">Number of Likes: {{numberOfLikes.length}}</p>
          <h4 class="liked-by liked-header">Message liked by the following users:</h4>
 
-     {{#listOfLikes}}
+            {{#listOfLikes}}
       
        <p class="liked-by"> {{userId}}</p>
-    {{/listOfLikes}}
+            {{/listOfLikes}}
    
 
 

@@ -7,18 +7,22 @@
     <title>Document</title>
         <link  rel="stylesheet" href = "./styles.css"/></link>
 </head>
-<body><header>
+<body>
+    <header class="links">
+
         <a href="/" class="navigation">Home</a>
         <a href="newgabs" class="navigation">Create a Gab</a>
         <a href="/login" class="navigation">Log-in</a>
         <a href="/signup" class="navigation">Register</a>
         
-    </header>   
+    </header> 
+    <div class="form">  
         <form class = "inputs" method="post" action="/login">
             <input class = "inputs" type="text" name="name" placeholder="Name"/>
             <input class = "inputs" type="password" name="password" placeholder="Password"/>
             <button class = "submit sign-in"type="submit">Log-in</button>
         </form>
+    </div>
 
     
 </body>
