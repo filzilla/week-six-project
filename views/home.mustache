@@ -36,10 +36,10 @@
          <p class="date">{{createdAt}}</p>
          <p class="user"> Posted by: {{userId}}</p>
         
-              {{#model.showDelete}} <span class="button"><form action="/delete/{{id}}" method="POST"><button class="delete-bttn" name="delete" type="submit">Delete</button></form></span>
-                <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/model.showDelete}}
+              {{#showDelete}} <span class="button"><form action="/delete/{{id}}" method="POST"><button class="delete-bttn" name="delete" type="submit">Delete</button></form></span>
+                <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/showDelete}}
 
- {{^model.showDelete}} <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/model.showDelete}}
+ {{^showDelete}} <span class="button"><form action="/like/{{id}}" method="POST" ><button class="like-bttn" type="submit">Like</button></form></span>{{/showDelete}}
 
                 <a class="user" href= "/likes/{{id}}">View Likes</a>
                 <p>No Likes Yet</p>

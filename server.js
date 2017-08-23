@@ -42,7 +42,8 @@ application.get('/', async (request, response) => {
     if(request.session.user){
          var list =  await models.Messages.findAll({
         order:[
-            ['createdAt', 'DESC']]
+            ['createdAt', 'DESC']],
+          
        //  include: [{all:true}
                  //    {  model: models.users,
                    //     as: "users"
@@ -70,33 +71,24 @@ application.get('/', async (request, response) => {
         
     });
 
-   // var showDelete = await models.Messages.find({
-   //     where: {
+    var likes = await models.List.findAll({});
 
-     //       userid
-     //   }
-   // })
-    if(request.session.userId === models.Messages.userId){
-    var showDelete = true;
+        console.log(list.length);
+   for (i = 0; i < list.length; i++) {
+      if (list[i].userId === request.session.userId) {
+         
+        list[i].showDelete = true;
+    
+        console.log (list[i].userId);
+        console.log(list[i].showDelete);
     }else{
-        var showDelete = false;
+        list.showDelete = false;
     }
-       
+   }  
     model.list = list;
-    model.showDelete = showDelete;
     model.user = user;
-    console.log(model.showDelete);
-
-
     
-   // console.log(user);
-   // model.isAuthenticated= request.session.isAuthenticated;
-    
-    //console.log(list)
-
-    //if logged in display 
-    //  console.log(list);
-    response.render('home', {model, showDelete});
+    response.render('home', {model, list});
     }else{
         response.redirect('/signup');
     }
@@ -151,10 +143,7 @@ application.post('/login', async (request, response) => {
             request.session.user = user.username;
             request.session.isAuthenticated = true;
             request.session.userId = user.displayname;
-      //      console.log(user.id);
-      //      console.log(request.session.userId);
-      //      console.log(request.session.user);
-      //      console.log(user.displayname);
+    
             return response.redirect('/newgabs');
            
        } catch(e) {
